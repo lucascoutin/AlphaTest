@@ -1,4 +1,4 @@
-Gizmo {
+Group {
 name AlphaTest
 inputs 2
 tile_color 0xff
