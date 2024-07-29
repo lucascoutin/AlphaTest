@@ -38,19 +38,19 @@ Group {
   xpos 1392
   ypos -106
  }
-set Nf459c000 [stack 0]
+set Nd8366400 [stack 0]
  Dot {
   name Dot5
   xpos 1172
   ypos -106
  }
-set Nf459c400 [stack 0]
+set Nd8366800 [stack 0]
  Dot {
   name Dot16
   xpos 234
   ypos -106
  }
-set Nf459c800 [stack 0]
+set Nd8366c00 [stack 0]
  Dot {
   name Dot2
   xpos 525
@@ -66,7 +66,7 @@ set Nf459c800 [stack 0]
   xpos 491
   ypos 1
  }
-push $Nf459c800
+push $Nd8366c00
  Dot {
   name Dot15
   xpos 234
@@ -76,7 +76,6 @@ push $Nf459c800
   inputs 2
   which {{matte}}
   name Switch2
-  selected true
   xpos 491
   ypos 101
  }
@@ -85,7 +84,7 @@ push $Nf459c800
   xpos 525
   ypos 216
  }
-set Nf467e000 [stack 0]
+set N805c2000 [stack 0]
  Dot {
   name Dot18
   xpos 719
@@ -96,13 +95,13 @@ set Nf467e000 [stack 0]
   xpos 719
   ypos 865
  }
-push $Nf467e000
+push $N805c2000
  Dot {
   name Dot12
   xpos 382
   ypos 216
  }
-set Nf467e400 [stack 0]
+set N805c2c00 [stack 0]
  Dot {
   name Dot14
   xpos 238
@@ -113,7 +112,7 @@ set Nf467e400 [stack 0]
   xpos 238
   ypos 320
  }
-push $Nf467e400
+push $N805c2c00
  ChannelMerge {
   inputs 2
   operation xor
@@ -126,7 +125,7 @@ push $Nf467e400
   xpos 382
   ypos 433
  }
-push $Nf467e000
+push $N805c2000
  Switch {
   inputs 2
   which {{mode}}
@@ -151,24 +150,33 @@ push $Nf467e000
   xpos 525
   ypos 614
  }
-push $Nf459c400
+push $Nd8366800
  Remove {
   name Remove1
   xpos 1138
-  ypos -12
+  ypos -43
+ }
+ Reformat {
+  type scale
+  scale {{curve x1 1}}
+  resize none
+  black_outside true
+  name Reformat1
+  xpos 1138
+  ypos 9
  }
  Dot {
   name Dot7
   xpos 1172
   ypos 90
  }
-set Nf46c2c00 [stack 0]
+set N805e3c00 [stack 0]
  Dot {
   name Dot6
   xpos 1001
   ypos 90
  }
-set Nf46c3000 [stack 0]
+set N80606000 [stack 0]
  Dot {
   name Dot8
   xpos 857
@@ -193,7 +201,7 @@ set Nf46c3000 [stack 0]
   xpos 857
   ypos 301
  }
-push $Nf46c3000
+push $N80606000
  Expression {
   temp_name0 cx
   temp_expr0 input.width/2
@@ -229,7 +237,7 @@ push $Nf46c3000
   xpos 1001
   ypos 488
  }
-push $Nf46c2c00
+push $N805e3c00
  Expression {
   expr0 backColor.r
   expr1 backColor.g
@@ -264,7 +272,7 @@ push $Nf46c2c00
   xpos 1172
   ypos 722
  }
-push $Nf459c000
+push $Nd8366400
  Dissolve {
   inputs 2
   which 1
