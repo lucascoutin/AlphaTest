@@ -1,276 +1,288 @@
 Group {
-name AlphaTest
-inputs 2
-tile_color 0xff
-addUserKnob {20 control l AlphaTest}
-addUserKnob {4 mode l Mode M {Standard Edge}}
-addUserKnob {6 invAlpha l Overlay -STARTLINE}
-addUserKnob {4 matte l Matte M {"Matte Alpha" "Source Alpha"}}
-addUserKnob {41 backColor l "Background Color" T Constant.backColor}
-addUserKnob {7 checkerContrast l "Checkerboard Contrast"}
-checkerContrast 0.1
-addUserKnob {41 checkerSize l "Checkerboard Size" T verticalLines.checkerSize}
-addUserKnob {41 disableChecker l Disable -STARTLINE T Merge1.disable}
-addUserKnob {26 ""}
-addUserKnob {41 masterMix l Mix T Dissolve1.which}
-addUserKnob {20 info l Info}
-addUserKnob {26 _1 l "" +STARTLINE T "Simple matte check."}
-addUserKnob {26 ""}
-addUserKnob {26 _2 l "" +STARTLINE T "Created by <b><a href=\"https://vimeo.com/lucascoutinho\">Lucas L. Coutinho</a></b>"}
-addUserKnob {26 _3 l "" +STARTLINE T "Version: <b>01"}
-addUserKnob {26 _4 l "" +STARTLINE T "Year: 2024"}
+ name AlphaTest
+ inputs 2
+ tile_color 0xff
+ addUserKnob {20 control l AlphaTest}
+ addUserKnob {4 mode l Mode M {Standard Edge}}
+ addUserKnob {6 invAlpha l Overlay -STARTLINE}
+ addUserKnob {4 matte l Matte M {"Source Alpha" "Matte Alpha"}}
+ addUserKnob {41 backColor l "Background Color" T Constant.backColor}
+ addUserKnob {7 checkerContrast l "Checkerboard Contrast"}
+ checkerContrast 0.1
+ addUserKnob {41 checkerSize l "Checkerboard Size" T verticalLines.checkerSize}
+ addUserKnob {41 disableChecker l Disable -STARTLINE T Merge1.disable}
+ addUserKnob {26 ""}
+ addUserKnob {41 masterMix l Mix T Dissolve1.which}
+ addUserKnob {20 info l Info}
+ addUserKnob {26 _1 l "" +STARTLINE T "Simple matte check."}
+ addUserKnob {26 ""}
+ addUserKnob {26 _2 l "" +STARTLINE T "Created by <b><a href=\"https://vimeo.com/lucascoutinho\">Lucas L. Coutinho</a></b>"}
+ addUserKnob {26 _3 l "" +STARTLINE T "Version: <b>02"}
+ addUserKnob {26 _4 l "" +STARTLINE T "Year: 2024"}
 }
-Input {
-inputs 0
-name Source
-xpos 1358
-ypos -275
-}
-Dot {
-name Dot3
-xpos 1392
-ypos -106
-}
-set Nee383400 [stack 0]
-Dot {
-name Dot5
-xpos 1172
-ypos -106
-}
-set Nf0fb7000 [stack 0]
-Dot {
-name Dot16
-xpos 375
-ypos -106
-}
-set Nf0fb6c00 [stack 0]
-Dot {
-name Dot15
-xpos 375
-ypos 104
-}
-Input {
-inputs 0
-name Matte
-xpos 462
-ypos -22
-number 1
-}
-push $Nf0fb6c00
-Dot {
-name Dot2
-xpos 666
-ypos -106
-}
-Shuffle2 {
-inputs 2
-fromInput1 {{0} B A}
-fromInput2 {{1} B A}
-in2 alpha
-mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.alpha 1 0 rgba.alpha 0 3"
-name Shuffle1
-xpos 632
-ypos -22
-}
-Switch {
-inputs 2
-which {{matte}}
-name Switch2
-xpos 632
-ypos 101
-}
-Dot {
-name Dot11
-xpos 666
-ypos 216
-}
-set N10e37800 [stack 0]
-Dot {
-name Dot12
-xpos 523
-ypos 216
-}
-set N10e37400 [stack 0]
-Dot {
-name Dot14
-xpos 379
-ypos 216
-}
-Dot {
-name Dot13
-xpos 379
-ypos 320
-}
-push $N10e37400
-ChannelMerge {
-inputs 2
-operation xor
-name ChannelMerge1
-xpos 489
-ypos 305
-}
-Dot {
-name Dot10
-xpos 523
-ypos 433
-}
-push $N10e37800
-Switch {
-inputs 2
-which {{mode}}
-name Switch1
-xpos 632
-ypos 430
-}
-Invert {
-channels alpha
-name Invert1
-xpos 632
-ypos 504
-disable {{!invAlpha}}
-}
-Premult {
-name Premult1
-xpos 632
-ypos 556
-}
-Dot {
-name Dot44
-xpos 666
-ypos 614
-}
-push $Nf0fb7000
-Remove {
-name Remove1
-xpos 1138
-ypos -35
-}
-Reformat {
-type scale
-black_outside true
-name Reformat1
-xpos 1138
-ypos 17
-}
-Dot {
-name Dot7
-xpos 1172
-ypos 90
-}
-set N10d3a400 [stack 0]
-Dot {
-name Dot6
-xpos 1001
-ypos 90
-}
-set N10d3a800 [stack 0]
-Dot {
-name Dot8
-xpos 857
-ypos 90
-}
-Expression {
-temp_name0 cx
-temp_expr0 input.width/2
-temp_name1 cy
-temp_expr1 input.height/2
-channel0 rgb
-expr0 "sin((x-cx)/ceil(checkerSize)) > 0"
-name verticalLines
-xpos 823
-ypos 186
-addUserKnob {20 User}
-addUserKnob {7 checkerSize l Size R 1 200}
-checkerSize 10
-}
-Dot {
-name Dot9
-xpos 857
-ypos 301
-}
-push $N10d3a800
-Expression {
-temp_name0 cx
-temp_expr0 input.width/2
-temp_name1 cy
-temp_expr1 input.height/2
-channel0 rgb
-expr0 "sin((y-cy)/verticalLines.checkerSize) > 0"
-name horizontalLines
-xpos 967
-ypos 184
-addUserKnob {20 User}
-}
-Merge2 {
-inputs 2
-operation difference
-bbox B
-name Merge2
-xpos 967
-ypos 298
-}
-Expression {
-channel0 rgb
-expr0 "r < 1 ? contrast : r"
-name Expression3
-xpos 967
-ypos 390
-addUserKnob {20 User}
-addUserKnob {7 contrast l Contrast}
-contrast {{1-checkerContrast}}
-}
-Dot {
-name Dot1
-xpos 1001
-ypos 488
-}
-push $N10d3a400
-Expression {
-expr0 backColor.r
-expr1 backColor.g
-expr2 backColor.b
-expr3 1
-name Constant
-tile_color 0x333333ff
-xpos 1138
-ypos 183
-addUserKnob {20 User l Control}
-addUserKnob {18 backColor l Color}
-backColor 0.18
-addUserKnob {6 backColor_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
-}
-Merge2 {
-inputs 2
-operation multiply
-bbox B
-name Merge1
-selected true
-xpos 1138
-ypos 485
-}
-Merge2 {
-inputs 2
-bbox B
-name Merge7
-xpos 1138
-ypos 611
-}
-Dot {
-name Dot4
-xpos 1172
-ypos 722
-}
-push $Nee383400
-Dissolve {
-inputs 2
-which 1
-name Dissolve1
-xpos 1358
-ypos 713
-}
-Output {
-name Output1
-xpos 1358
-ypos 885
-}
+ Input {
+  inputs 0
+  name Matte
+  xpos 321
+  ypos 1
+  number 1
+ }
+ Input {
+  inputs 0
+  name Source
+  xpos 1358
+  ypos -275
+ }
+ Dot {
+  name Dot3
+  xpos 1392
+  ypos -106
+ }
+set Nf459c000 [stack 0]
+ Dot {
+  name Dot5
+  xpos 1172
+  ypos -106
+ }
+set Nf459c400 [stack 0]
+ Dot {
+  name Dot16
+  xpos 234
+  ypos -106
+ }
+set Nf459c800 [stack 0]
+ Dot {
+  name Dot2
+  xpos 525
+  ypos -106
+ }
+ Shuffle2 {
+  inputs 2
+  fromInput1 {{0} B A}
+  fromInput2 {{1} B A}
+  in2 alpha
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.green 0 1 rgba.blue 0 2 rgba.blue 0 2 rgba.alpha 1 0 rgba.alpha 0 3"
+  name Shuffle1
+  xpos 491
+  ypos 1
+ }
+push $Nf459c800
+ Dot {
+  name Dot15
+  xpos 234
+  ypos 104
+ }
+ Switch {
+  inputs 2
+  which {{matte}}
+  name Switch2
+  selected true
+  xpos 491
+  ypos 101
+ }
+ Dot {
+  name Dot11
+  xpos 525
+  ypos 216
+ }
+set Nf467e000 [stack 0]
+ Dot {
+  name Dot18
+  xpos 719
+  ypos 216
+ }
+ Dot {
+  name Dot17
+  xpos 719
+  ypos 865
+ }
+push $Nf467e000
+ Dot {
+  name Dot12
+  xpos 382
+  ypos 216
+ }
+set Nf467e400 [stack 0]
+ Dot {
+  name Dot14
+  xpos 238
+  ypos 216
+ }
+ Dot {
+  name Dot13
+  xpos 238
+  ypos 320
+ }
+push $Nf467e400
+ ChannelMerge {
+  inputs 2
+  operation xor
+  name ChannelMerge1
+  xpos 348
+  ypos 305
+ }
+ Dot {
+  name Dot10
+  xpos 382
+  ypos 433
+ }
+push $Nf467e000
+ Switch {
+  inputs 2
+  which {{mode}}
+  name Switch1
+  xpos 491
+  ypos 430
+ }
+ Invert {
+  channels alpha
+  name Invert1
+  xpos 491
+  ypos 504
+  disable {{!invAlpha}}
+ }
+ Premult {
+  name Premult1
+  xpos 491
+  ypos 556
+ }
+ Dot {
+  name Dot44
+  xpos 525
+  ypos 614
+ }
+push $Nf459c400
+ Remove {
+  name Remove1
+  xpos 1138
+  ypos -12
+ }
+ Dot {
+  name Dot7
+  xpos 1172
+  ypos 90
+ }
+set Nf46c2c00 [stack 0]
+ Dot {
+  name Dot6
+  xpos 1001
+  ypos 90
+ }
+set Nf46c3000 [stack 0]
+ Dot {
+  name Dot8
+  xpos 857
+  ypos 90
+ }
+ Expression {
+  temp_name0 cx
+  temp_expr0 input.width/2
+  temp_name1 cy
+  temp_expr1 input.height/2
+  channel0 rgb
+  expr0 "sin((x-cx)/ceil(checkerSize)) > 0"
+  name verticalLines
+  xpos 823
+  ypos 186
+  addUserKnob {20 User}
+  addUserKnob {7 checkerSize l Size R 1 200}
+  checkerSize 10
+ }
+ Dot {
+  name Dot9
+  xpos 857
+  ypos 301
+ }
+push $Nf46c3000
+ Expression {
+  temp_name0 cx
+  temp_expr0 input.width/2
+  temp_name1 cy
+  temp_expr1 input.height/2
+  channel0 rgb
+  expr0 "sin((y-cy)/verticalLines.checkerSize) > 0"
+  name horizontalLines
+  xpos 967
+  ypos 184
+  addUserKnob {20 User}
+ }
+ Merge2 {
+  inputs 2
+  operation difference
+  bbox B
+  name Merge2
+  xpos 967
+  ypos 298
+ }
+ Expression {
+  channel0 rgb
+  expr0 "r < 1 ? contrast : r"
+  name Expression3
+  xpos 967
+  ypos 390
+  addUserKnob {20 User}
+  addUserKnob {7 contrast l Contrast}
+  contrast {{1-checkerContrast}}
+ }
+ Dot {
+  name Dot1
+  xpos 1001
+  ypos 488
+ }
+push $Nf46c2c00
+ Expression {
+  expr0 backColor.r
+  expr1 backColor.g
+  expr2 backColor.b
+  expr3 1
+  name Constant
+  tile_color 0x333333ff
+  xpos 1138
+  ypos 183
+  addUserKnob {20 User l Control}
+  addUserKnob {18 backColor l Color}
+  backColor 0.18
+  addUserKnob {6 backColor_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ }
+ Merge2 {
+  inputs 2
+  operation multiply
+  bbox B
+  name Merge1
+  xpos 1138
+  ypos 485
+ }
+ Merge2 {
+  inputs 2
+  bbox B
+  name Merge7
+  xpos 1138
+  ypos 611
+ }
+ Dot {
+  name Dot4
+  xpos 1172
+  ypos 722
+ }
+push $Nf459c000
+ Dissolve {
+  inputs 2
+  which 1
+  name Dissolve1
+  xpos 1358
+  ypos 713
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy1
+  xpos 1358
+  ypos 856
+ }
+ Output {
+  name Output1
+  xpos 1358
+  ypos 1062
+ }
 end_group
