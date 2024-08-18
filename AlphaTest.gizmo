@@ -3,7 +3,7 @@ Group {
  inputs 2
  tile_color 0xff
  addUserKnob {20 control l AlphaTest}
- addUserKnob {4 mode l Mode M {Standard Edge}}
+ addUserKnob {4 alphamode l Mode M {Standard Edge}}
  addUserKnob {6 invAlpha l Overlay -STARTLINE}
  addUserKnob {4 matte l Matte M {"Source Alpha" "Matte Alpha"}}
  addUserKnob {41 backColor l "Background Color" T Constant.backColor}
@@ -128,7 +128,7 @@ push $N805c2c00
 push $N805c2000
  Switch {
   inputs 2
-  which {{mode}}
+  which {{alphamode}}
   name Switch1
   xpos 491
   ypos 430
