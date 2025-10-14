@@ -1,7 +1,7 @@
 Group {
  name AlphaTest
  inputs 2
- tile_color 0xff
+ tile_color 0x444444ff
  addUserKnob {20 control l AlphaTest}
  addUserKnob {4 alphamode l Mode M {Standard Edge}}
  addUserKnob {6 invAlpha l Overlay -STARTLINE}
